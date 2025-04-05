@@ -15,7 +15,7 @@ st.title("Diabetes Prediction Web App")
 # Load Dataset
 @st.cache_data
 def load_data():
-    df = pd.read_csv("diabetes.csv")
+    df = pd.read_csv("/content/drive/MyDrive/diabetes.csv")
     return df
 
 df = load_data()
