@@ -1,4 +1,4 @@
-!pip install streamlit # This line installs the streamlit library
+!pip install streamlit 
 
 import numpy as np
 import pandas as pd
@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn import svm
 from sklearn.metrics import accuracy_score
 
-# ... (rest of your code) ...
+
 
 # Title
 st.title("Diabetes Prediction Web App")
