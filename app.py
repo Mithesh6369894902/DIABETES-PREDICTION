@@ -1,14 +1,17 @@
+!pip install streamlit # This line installs the streamlit library
+
 import numpy as np
 import pandas as pd
 import streamlit as st
-from sklearn.model_selection 
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn import svm
 from sklearn.metrics import accuracy_score
 
+# ... (rest of your code) ...
+
 # Title
 st.title("Diabetes Prediction Web App")
-
 # Load Dataset
 @st.cache_data
 def load_data():
