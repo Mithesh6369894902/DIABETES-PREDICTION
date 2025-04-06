@@ -1,4 +1,3 @@
-!pip install streamlit
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -9,16 +8,17 @@ from sklearn.metrics import accuracy_score
 
 st.title("🩺 Diabetes Prediction Web App")
 
+# Load your actual CSV from /mnt/data
 @st.cache_data
 def load_data():
-    df = pd.read_csv("diabetes.csv")
+    df = pd.read_csv("/mnt/data/diabetes.csv")  # Updated path
     return df
 
 df = load_data()
-st.subheader("Sample Data")
+st.subheader("📊 Sample Data")
 st.write(df.head())
 
-# Split features and labels
+# Features and labels
 X = df.drop(columns='Outcome', axis=1)
 Y = df['Outcome']
 
@@ -26,21 +26,21 @@ Y = df['Outcome']
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
 
-# Train/test split
+# Split the data
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, stratify=Y, random_state=2)
 
-# Train SVM model
+# Train SVM
 model = svm.SVC(kernel='linear')
 model.fit(X_train, Y_train)
 
-# Accuracy Scores
+# Accuracy display
 train_accuracy = accuracy_score(Y_train, model.predict(X_train))
 test_accuracy = accuracy_score(Y_test, model.predict(X_test))
 
 st.success(f"✅ Training Accuracy: {train_accuracy * 100:.2f}%")
 st.info(f"🧪 Test Accuracy: {test_accuracy * 100:.2f}%")
 
-# Sidebar inputs
+# Sidebar input
 st.sidebar.header("👤 Enter Patient Details")
 
 def user_input():
@@ -61,7 +61,6 @@ input_data = user_input()
 input_data_scaled = scaler.transform(input_data)
 prediction = model.predict(input_data_scaled)
 
-# Prediction Result
 if st.button("Predict"):
     if prediction[0] == 1:
         st.error("🔴 The person is **diabetic**.")
