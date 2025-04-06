@@ -12,7 +12,7 @@ st.title("🩺 Diabetes Prediction Web App")
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("/content/drive/MyDrive/diabetes.csv")
+    df = pd.read_csv("diabetes.csv")
     return df
 
 df = load_data()
