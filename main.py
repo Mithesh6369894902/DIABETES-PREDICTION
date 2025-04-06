@@ -8,10 +8,14 @@ from sklearn.metrics import accuracy_score
 
 st.title("🩺 Diabetes Prediction Web App")
 
-# Load your actual CSV from /mnt/data
+# Load your actual CSV from /mnt/data (or a URL if needed)
 @st.cache_data
 def load_data():
-    df = pd.read_csv("/mnt/data/diabetes.csv")  # Updated path
+    try:
+        df = pd.read_csv("diabetes.csv") #try local file
+    except FileNotFoundError:
+        df= pd.read_csv("https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv", header=None, names=['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome'])
+        #if local fails, get it from URL
     return df
 
 df = load_data()
@@ -54,7 +58,7 @@ def user_input():
     Age = st.sidebar.slider('Age', 15, 100, 30)
 
     user_data = np.array([[Pregnancies, Glucose, BloodPressure, SkinThickness,
-                           Insulin, BMI, DiabetesPedigreeFunction, Age]])
+                                    Insulin, BMI, DiabetesPedigreeFunction, Age]])
     return user_data
 
 input_data = user_input()
